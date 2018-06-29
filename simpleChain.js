@@ -64,23 +64,23 @@ class Blockchain{
 
 	// validate block
 	validateBlock(blockHeight){
-		// get block object
-		// let block = this.chain[blockHeight];
+
 		getLevelDBData(blockHeight)
 		.then(function (block) {
-			let block = block;
 			// get block hash
 			let blockHash = block.hash;
 			// remove block hash to test block integrity
 			block.hash = '';
+
 			// generate block hash
 			let validBlockHash = SHA256(JSON.stringify(block)).toString();
+			
 			// Compare
 			if (blockHash===validBlockHash) {
-				return true;
+				console.log(true);
 			} else {
 				console.log('Block #'+blockHeight+' invalid hash:\n'+blockHash+'<>'+validBlockHash);
-				return false;
+				console.log(false);
 			}
 		})
 		.catch(function (message) {
